@@ -1,11 +1,10 @@
-import PersonaForm from "./components/persona";
+import React from "react";
+import RouterAdmin from "./routers/RouterAdmin";
 
-function App() {
+const App = () => {
   return (
-    <div>
-      <PersonaForm/>
-    </div>
+    <RouterAdmin />
   );
-}
+};
 
 export default App;
