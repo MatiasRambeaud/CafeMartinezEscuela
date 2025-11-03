@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { isAdminUser } from "../auth/roles";
 
 const Nav = () => {
   const baseLink = { textDecoration: "none", color: "#374151", fontSize: 18, padding: "8px 10px", borderRadius: 10, transition: "all .15s ease" };
@@ -28,6 +29,26 @@ const Nav = () => {
     );
   };
 
+  const [esAdmin, setEsAdmin] = useState(false);
+  useEffect(() => {
+    const check = () => {
+      try {
+        const raw = localStorage.getItem("usuario");
+        const user = raw ? JSON.parse(raw) : null;
+        setEsAdmin(isAdminUser(user));
+      } catch (_) {
+        setEsAdmin(false);
+      }
+    };
+    check();
+    window.addEventListener("storage", check);
+    window.addEventListener("focus", check);
+    return () => {
+      window.removeEventListener("storage", check);
+      window.removeEventListener("focus", check);
+    };
+  }, []);
+
   return (
     <header style={{ position: "sticky", top: 0, zIndex: 50, background: "#ffffffcc", backdropFilter: "blur(8px)", borderBottom: "1px solid #e5e7eb" }}>
       <nav style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "18px 24px" }}>
@@ -38,6 +59,8 @@ const Nav = () => {
           <LinkItem to="/">Inicio</LinkItem>
           <LinkItem to="/nosotros">Nosotros</LinkItem>
           <LinkItem to="/contacto">Contacto</LinkItem>
+          {esAdmin && <LinkItem to="/admin" isButton>Admin</LinkItem>}
+          <LinkItem to="/perfil">Perfil</LinkItem>
           <LinkItem to="/login" isButton>Login</LinkItem>
         </div>
       </nav>

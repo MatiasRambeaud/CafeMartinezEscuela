@@ -33,8 +33,11 @@ const LoginForm = () => {
       })
       .then((user) => {
         alert(`Bienvenido ${user.Nombre} ${user.Apellido}`);
-        // TODO: almacenar sesión si se requiere (localStorage/context)
-        navigate("/");
+        try {
+          localStorage.removeItem("usuario");
+          localStorage.setItem("usuario", JSON.stringify(user));
+        } catch (_) {}
+        navigate("/menu", { replace: true });
       })
       .catch((err) => {
         alert(err.message || "Error de inicio de sesión");
