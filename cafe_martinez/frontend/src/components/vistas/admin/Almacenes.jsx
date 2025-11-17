@@ -3,7 +3,7 @@ import Nav from "../../common/Nav";
 
 const Almacenes = () => {
   const [items, setItems] = useState([]);
-  const [form, setForm] = useState({ Nombre: "", Descripcion: "", Stock: "", ID_Usuario: "" });
+  const [form, setForm] = useState({ Nombre: "", Descripcion: "", ID_Usuario: "" });
   const [editId, setEditId] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -30,7 +30,7 @@ const Almacenes = () => {
       const method = editId ? "PUT" : "POST";
       const res = await fetch(url, { method, headers: { "Content-Type": "application/json" }, body: JSON.stringify(form) });
       if (!res.ok) throw new Error();
-      setForm({ Nombre: "", Descripcion: "", Stock: "", ID_Usuario: "" });
+      setForm({ Nombre: "", Descripcion: "", ID_Usuario: "" });
       setEditId(null);
       await load();
     } catch (_) { setError("No se pudo guardar."); }
@@ -58,10 +58,9 @@ const Almacenes = () => {
         <form onSubmit={save} style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 8, marginBottom: 16 }}>
           <input name="Nombre" value={form.Nombre} onChange={onChange} placeholder="Nombre" style={input} />
           <input name="Descripcion" value={form.Descripcion} onChange={onChange} placeholder="Descripción" style={input} />
-          <input name="Stock" value={form.Stock} onChange={onChange} placeholder="Stock" style={input} />
           <input name="ID_Usuario" value={form.ID_Usuario} onChange={onChange} placeholder="ID_Usuario" style={input} />
           <button type="submit" style={btnPrimary}>{editId ? "Actualizar" : "Agregar"}</button>
-          {editId && <button type="button" onClick={() => { setEditId(null); setForm({ Nombre: "", Descripcion: "", Stock: "", ID_Usuario: "" }); }} style={btnGhost}>Cancelar</button>}
+          {editId && <button type="button" onClick={() => { setEditId(null); setForm({ Nombre: "", Descripcion: "", ID_Usuario: "" }); }} style={btnGhost}>Cancelar</button>}
         </form>
 
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -70,7 +69,7 @@ const Almacenes = () => {
               <th style={th}>ID_Almacen</th>
               <th style={th}>Nombre</th>
               <th style={th}>Descripcion</th>
-              <th style={th}>Stock</th>
+              <th style={th}>Stock Total (Suma de Ingredientes)</th>
               <th style={th}>ID_Usuario</th>
               <th style={th}>Acciones</th>
             </tr>
@@ -81,10 +80,14 @@ const Almacenes = () => {
                 <td style={td}>{a.ID_Almacen}</td>
                 <td style={td}>{a.Nombre}</td>
                 <td style={td}>{a.Descripcion}</td>
-                <td style={td}>{a.Stock}</td>
+                <td style={td}>
+                  <strong style={{ color: "#059669", fontSize: "16px" }}>
+                    {parseInt(a.Stock_Total || 0).toLocaleString("es-AR")} unidades
+                  </strong>
+                </td>
                 <td style={td}>{a.ID_Usuario}</td>
                 <td style={td}>
-                  <button onClick={() => { setEditId(a.ID_Almacen); setForm({ Nombre: a.Nombre, Descripcion: a.Descripcion, Stock: a.Stock, ID_Usuario: a.ID_Usuario }); }} style={btnPrimary}>Editar</button>
+                  <button onClick={() => { setEditId(a.ID_Almacen); setForm({ Nombre: a.Nombre, Descripcion: a.Descripcion, ID_Usuario: a.ID_Usuario }); }} style={btnPrimary}>Editar</button>
                   <button onClick={() => remove(a.ID_Almacen)} style={{ ...btnPrimary, background: "#f43f5e" }}>Borrar</button>
                 </td>
               </tr>

@@ -10,7 +10,7 @@ const UsuarioForm = () => {
     sexo: "",
     correo: "",
     clave: "",
-    ID_Cargo: "6", // valor por defecto (Cliente)
+    ID_Cargo: "5", // valor por defecto (Cliente)
     activo: true,
   });
 
@@ -43,7 +43,7 @@ const UsuarioForm = () => {
           sexo: "",
           correo: "",
           clave: "",
-          ID_Cargo: "6",
+          ID_Cargo: "5",
           activo: true,
         });
       } else {
@@ -131,8 +131,7 @@ const UsuarioForm = () => {
         <option value="2">Recepcionista</option>
         <option value="3">Mozo</option>
         <option value="4">Chef</option>
-        <option value="5">Manager</option>
-        <option value="6">Cliente</option>
+        <option value="5">Cliente</option>
       </select>
 
       <button type="submit" className="boton">

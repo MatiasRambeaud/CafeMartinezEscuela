@@ -10,12 +10,16 @@ import Menu from "../components/vistas/menu";
 import Contacto from "../components/vistas/contacto";
 import Perfil from "../components/vistas/perfil";
 import RequireAdmin from "../components/auth/RequireAdmin";
+import RequireRole from "../components/auth/RequireRole";
 import AdminPanel from "../components/vistas/adminPanel";
 import Cargos from "../components/vistas/admin/Cargos";
 import Almacenes from "../components/vistas/admin/Almacenes";
 import Ingredientes from "../components/vistas/admin/Ingredientes";
 import Menus from "../components/vistas/admin/Menus";
 import Comidas from "../components/vistas/admin/Comidas";
+import Mozo from "../components/vistas/Mozo";
+import Recepcionista from "../components/vistas/Recepcionista";
+import Chef from "../components/vistas/Chef";
 
 const RouterAdmin = () => {
   return (
@@ -38,6 +42,9 @@ const RouterAdmin = () => {
         <Route path="/login" element={<LoginForm />} />
         <Route path="/admin/usuarios" element={<RequireAdmin><ListaUsuarios /></RequireAdmin>} />
         <Route path="/admin/editar" element={<RequireAdmin><UsuarioFormEditar /></RequireAdmin>} />
+        <Route path="/mozo" element={<RequireRole allowedRoles={["mozo"]}><Mozo /></RequireRole>} />
+        <Route path="/recepcionista" element={<RequireRole allowedRoles={["recepcionista"]}><Recepcionista /></RequireRole>} />
+        <Route path="/chef" element={<RequireRole allowedRoles={["chef"]}><Chef /></RequireRole>} />
 
       </Routes>
     </Router>

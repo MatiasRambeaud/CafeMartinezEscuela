@@ -8,7 +8,7 @@ const UsuarioFormEditar = ({ usuario, onCancel, onUpdate }) => {
     sexo: usuario?.Sexo || "",
     correo: usuario?.Correo || "",
     clave: usuario?.Clave || "",
-    ID_Cargo: usuario?.ID_Cargo || 6,
+    ID_Cargo: usuario?.ID_Cargo || 5,
   });
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const UsuarioFormEditar = ({ usuario, onCancel, onUpdate }) => {
       sexo: usuario?.Sexo || "",
       correo: usuario?.Correo || "",
       clave: usuario?.Clave || "",
-      ID_Cargo: usuario?.ID_Cargo || 6,
+      ID_Cargo: usuario?.ID_Cargo || 5,
     });
   }, [usuario]);
 
@@ -78,8 +78,7 @@ const UsuarioFormEditar = ({ usuario, onCancel, onUpdate }) => {
         <option value="2">Recepcionista</option>
         <option value="3">Mozo</option>
         <option value="4">Chef</option>
-        <option value="5">Manager</option>
-        <option value="6">Cliente</option>
+        <option value="5">Cliente</option>
       </select>
 
       <div style={{ marginTop: "10px" }}>

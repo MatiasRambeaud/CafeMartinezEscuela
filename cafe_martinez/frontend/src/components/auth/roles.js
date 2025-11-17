@@ -15,4 +15,31 @@ export function isAdminUser(usuario) {
   return false;
 }
 
+export function isMozo(usuario) {
+  if (!usuario) return false;
+  const cargoId = Number(
+    usuario.ID_Cargo || usuario.IdCargo || usuario.idCargo || usuario.CargoId || usuario.cargoId ||
+    (typeof usuario.Cargo === "number" ? usuario.Cargo : undefined) || (typeof usuario.cargo === "number" ? usuario.cargo : undefined)
+  );
+  return Number.isFinite(cargoId) && cargoId === 3;
+}
+
+export function isRecepcionista(usuario) {
+  if (!usuario) return false;
+  const cargoId = Number(
+    usuario.ID_Cargo || usuario.IdCargo || usuario.idCargo || usuario.CargoId || usuario.cargoId ||
+    (typeof usuario.Cargo === "number" ? usuario.Cargo : undefined) || (typeof usuario.cargo === "number" ? usuario.cargo : undefined)
+  );
+  return Number.isFinite(cargoId) && cargoId === 2;
+}
+
+export function isChef(usuario) {
+  if (!usuario) return false;
+  const cargoId = Number(
+    usuario.ID_Cargo || usuario.IdCargo || usuario.idCargo || usuario.CargoId || usuario.cargoId ||
+    (typeof usuario.Cargo === "number" ? usuario.Cargo : undefined) || (typeof usuario.cargo === "number" ? usuario.cargo : undefined)
+  );
+  return Number.isFinite(cargoId) && cargoId === 4;
+}
+
 

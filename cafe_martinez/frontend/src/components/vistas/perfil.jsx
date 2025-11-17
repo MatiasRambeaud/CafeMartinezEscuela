@@ -23,25 +23,6 @@ const Perfil = () => {
     };
   }, []);
 
-  // Mapa local fijo de cargos (sin consultar backend)
-  const CARGO_MAP = {
-    1: "Administrador",
-    2: "Recepcionista",
-    3: "Mozo",
-    4: "Chef",
-    6: "Cliente",
-  };
-
-  const cargoNombre = useMemo(() => {
-    if (!usuario) return "";
-    const directo = usuario.CargoNombre || usuario.cargoNombre || usuario.CargoNombreDescripcion || usuario.CargoNombreCargo || usuario.Nombre_Cargo || usuario.Cargo?.Nombre || usuario.cargo?.nombre || usuario.Cargo?.Nombre_Cargo || usuario.cargo?.Nombre_Cargo;
-    if (directo) return String(directo);
-    const posibleId = usuario.CargoId || usuario.cargoId || usuario.IdCargo || usuario.idCargo || usuario.ID_Cargo || (typeof usuario.Cargo === "number" ? usuario.Cargo : undefined) || (typeof usuario.cargo === "number" ? usuario.cargo : undefined);
-    const idNum = Number(posibleId);
-    if (Number.isFinite(idNum) && CARGO_MAP[idNum]) return CARGO_MAP[idNum];
-    return "";
-  }, [usuario]);
-
   // Formato latino para nacimiento: DD/MM/AAAA
   const nacimientoFormato = useMemo(() => {
     if (!usuario) return "";
@@ -88,7 +69,6 @@ const Perfil = () => {
             {renderField("Correo", usuario.Correo || usuario.correo)}
             {renderField("Nacimiento", nacimientoFormato)}
             {renderField("Sexo", sexoFormato)}
-            {renderField("Cargo", cargoNombre || usuario.Cargo?.Nombre || usuario.cargo?.nombre || usuario.Nombre_Cargo || usuario.Cargo?.Nombre_Cargo)}
           </div>
         )}
       </main>
